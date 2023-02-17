@@ -19,6 +19,8 @@ let divide = function(a, b) {
 }
 
 let operate = function(a, b, operator) {
+    a = Number(a);
+    b = Number(b);
     switch(operator) {
         case "add":
             return add(a, b);
@@ -40,16 +42,18 @@ let updateDisplay = function(text) {
 }
 
 let clearCalculator = function() {
-    a = null;
-    b = null;
+    a = "";
+    b = "";
     operator = null;
     display.textContent = "";
+    equals = false;
 }
 
 let a = "";
 let b = "";
 let ans = null;
 let operator = null;
+let equals = false;
 
 const display = document.querySelector(".display");
 const buttons = document.querySelectorAll("button");
@@ -68,7 +72,9 @@ buttons.forEach(button => button.addEventListener("click", function() {
             let tempAns = operate(a, b, operator);
             clearCalculator();
             a = tempAns;
+            b = "";
             operator = tempOperator;
+            updateDisplay(a + this.textContent);
         } else {
             operator = this.classList[1];
             updateDisplay(this.textContent);
@@ -76,6 +82,13 @@ buttons.forEach(button => button.addEventListener("click", function() {
     }
 
     if (this.classList[0] === "number") {
+        if (equals) {
+            let tempA = this.textContent;
+            clearCalculator();
+            a = tempA;
+            updateDisplay(a);
+        }
+        
         if (operator === null) {
             a += this.textContent;
             updateDisplay(this.textContent);
@@ -83,11 +96,10 @@ buttons.forEach(button => button.addEventListener("click", function() {
             b += this.textContent;
             updateDisplay(this.textContent);
         }
-
-        // need to add clear calc if equals in on screen here
     }
 
     if (this.classList[0] === "equals") {
+        equals = true;
         ans = operate(a, b, operator)
         updateDisplay(this.textContent + ans);
     }
