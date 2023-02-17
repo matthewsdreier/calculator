@@ -114,6 +114,9 @@ buttons.forEach(button => button.addEventListener("click", function() {
     }
 
     if (this.classList[0] === "equals") {
+        if (b === "") {
+            return null;
+        }
         equals = true;
         let ans = operate(a, b, operator)
         updateDisplay(this.textContent + ans);
