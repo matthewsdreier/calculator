@@ -20,20 +20,21 @@ let divide = function(a, b) {
 }
 
 let operate = function(a, b, operator) {
+    nDecimals = 4;
     a = Number(a);
     b = Number(b);
     switch(operator) {
         case "add":
-            return add(a, b);
+            return Math.round(add(a, b) * 10 ** nDecimals) / 10 ** nDecimals;
             break;
         case "subtract":
-            return subtract(a, b);
+            return Math.round(subtract(a, b) * 10 ** nDecimals) / 10 ** nDecimals;
             break;
         case "multiply":
-            return multiply(a, b);
+            return Math.round(multiply(a, b) * 10 ** nDecimals) / 10 ** nDecimals;
             break;
         case "divide":
-            return divide(a, b);
+            return Math.round(divide(a, b) * 10 ** nDecimals) / 10 ** nDecimals;
             break;
     }
 }
