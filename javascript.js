@@ -12,6 +12,7 @@ let multiply = function(a, b) {
 
 let divide = function(a, b) {
     if (b === 0) {
+        error = true;
         return "ERROR";
     }
 
@@ -47,11 +48,12 @@ let clearCalculator = function() {
     operator = null;
     display.textContent = "";
     equals = false;
+    error = false;
 }
 
 let a = "";
 let b = "";
-let ans = null;
+let error = false;
 let operator = null;
 let equals = false;
 
@@ -62,6 +64,10 @@ buttons.forEach(button => button.addEventListener("click", function() {
     if (this.textContent === "clear") {
         clearCalculator();
         return null;
+    }
+
+    if (error) {
+        clearCalculator();
     }
 
     if (this.classList[0] === "operator") {
@@ -81,12 +87,21 @@ buttons.forEach(button => button.addEventListener("click", function() {
         }
     }
 
+    if (this.classList[0] === "negate") {
+        if (a === "") {
+            a += "-";
+            updateDisplay("-");
+        } else if (operator) {
+            b += "-";
+            updateDisplay("-");
+        } else {
+            return null;
+        }
+    }
+
     if (this.classList[0] === "number") {
         if (equals) {
-            let tempA = this.textContent;
-            clearCalculator();
-            a = tempA;
-            updateDisplay(a);
+            clearCalculator();;
         }
         
         if (operator === null) {
@@ -100,7 +115,7 @@ buttons.forEach(button => button.addEventListener("click", function() {
 
     if (this.classList[0] === "equals") {
         equals = true;
-        ans = operate(a, b, operator)
+        let ans = operate(a, b, operator)
         updateDisplay(this.textContent + ans);
     }
 
