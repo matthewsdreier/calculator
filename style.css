@@ -1,9 +1,17 @@
+* {
+    font-family: "Arial", "Helvetica", sans-serif;
+}
+
 body {
     gap: 20px;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+}
+
+header {
+    font-size: 30px;
 }
 
 .calculator {
