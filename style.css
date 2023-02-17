@@ -40,8 +40,11 @@ button {
 }
 
 .display {
+    display: flex;
+    align-items: center;
     border-style: solid;
     border-radius: 5px;
     border-width: 2px;
     flex: auto;
+    padding: 0px 5px;
 }

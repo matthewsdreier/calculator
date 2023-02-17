@@ -21,3 +21,15 @@ let divide = function(a, b) {
 let operate = function(a, b, operator) {
     return window[operator](a, b);
 }
+
+let updateDisplay = function(text) {
+    display.textContent = display.textContent + text;
+}
+
+const display = document.querySelector(".display");
+
+const buttons = document.querySelectorAll("button");
+
+buttons.forEach(button => button.addEventListener("click", function() {
+    updateDisplay(this.textContent);
+}));
